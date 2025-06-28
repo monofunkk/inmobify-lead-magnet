@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Star, MapPin, Building, Wifi, Car } from 'lucide-react';
 import EvaluationFormPopup from './EvaluationFormPopup';
+import EvaluationFormInline from './EvaluationFormInline';
 
 const LandingPage = () => {
   const [isFormPopupOpen, setIsFormPopupOpen] = useState(false);
@@ -48,17 +48,17 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-['Inter']">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-6xl mx-auto text-center">
           <div className="animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
+            <h1 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
               <span className="text-primary">Invierte en tu Futuro:</span><br />
               Departamentos con Hasta 10% de Bono Pie<br />
               y Opciones de <span className="text-primary">Pie Cero</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Deja que tus ahorros trabajen por ti. Descubre cómo miles de chilenos ya están construyendo su patrimonio con nosotros.
             </p>
           </div>
@@ -242,6 +242,21 @@ const LandingPage = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+        </div>
+      </section>
+
+      {/* Inline Form Section */}
+      <section className="py-20 px-4 bg-primary/10 fade-in-section">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              ¿Listo para <span className="text-primary">Invertir</span>?
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Completa tu evaluación y comienza tu camino hacia la inversión inmobiliaria
+            </p>
+          </div>
+          <EvaluationFormInline />
         </div>
       </section>
 
