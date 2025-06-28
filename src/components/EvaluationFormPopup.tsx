@@ -70,7 +70,7 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
       
       if (shouldTriggerWebhook) {
         try {
-          const response = await fetch('https://agenciau.app.n8n.cloud/webhook-test/form-recibido-calificados', {
+          const response = await fetch('https://agenciau.app.n8n.cloud/webhook/form-recibido-calificados', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
