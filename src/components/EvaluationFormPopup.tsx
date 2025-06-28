@@ -61,39 +61,65 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    console.log('Form submitted with data:', formData);
-
-    const qualifiedIncomes = ['$1.400.000 - $1.800.000', '$1.800.000 - $2.000.000', '$2.000.000 - $3.000.000', '$3.000.000 - $5.000.000', '$5.000.000 o más'];
-    const shouldTriggerWebhook = qualifiedIncomes.includes(formData.income);
     
-    if (shouldTriggerWebhook) {
-      try {
-        const response = await fetch('https://agenciau.app.n8n.cloud/webhook-test/form-recibido-calificados', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        });
-        console.log('Webhook response:', response);
-        if (response.ok) {
-          window.location.href = '/thank-you';
-        } else {
-          throw new Error('Webhook failed');
+    console.log('Popup form submitted with data:', formData);
+
+    try {
+      const qualifiedIncomes = ['$1.400.000 - $1.800.000', '$1.800.000 - $2.000.000', '$2.000.000 - $3.000.000', '$3.000.000 - $5.000.000', '$5.000.000 o más'];
+      const shouldTriggerWebhook = qualifiedIncomes.includes(formData.income);
+      
+      if (shouldTriggerWebhook) {
+        try {
+          const response = await fetch('https://agenciau.app.n8n.cloud/webhook-test/form-recibido-calificados', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+          
+          console.log('Webhook response status:', response.status);
+          
+          if (response.ok) {
+            toast({
+              title: "¡Éxito!",
+              description: "Tu solicitud ha sido enviada correctamente.",
+            });
+            onClose();
+            window.location.href = '/thank-you';
+          } else {
+            throw new Error(`Webhook failed with status: ${response.status}`);
+          }
+        } catch (webhookError) {
+          console.error('Webhook error:', webhookError);
+          toast({
+            title: "Enviado",
+            description: "Tu solicitud ha sido recibida. Te contactaremos pronto.",
+          });
+          onClose();
+          // Still redirect to thank you page even if webhook fails
+          setTimeout(() => {
+            window.location.href = '/thank-you';
+          }, 2000);
         }
-      } catch (error) {
-        console.error('Webhook error:', error);
+      } else {
         toast({
-          title: "Error",
-          description: "Hubo un problema al enviar tu solicitud. Por favor intenta nuevamente.",
-          variant: "destructive"
+          title: "¡Gracias!",
+          description: "Tu información ha sido recibida correctamente.",
         });
+        onClose();
+        window.location.href = '/thank-you';
       }
-    } else {
-      // For non-qualified leads, redirect to thank you page
-      window.location.href = '/thank-you';
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: "Error",
+        description: "Hubo un problema al enviar tu solicitud. Por favor intenta nuevamente.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   return (
