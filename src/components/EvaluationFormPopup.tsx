@@ -124,63 +124,63 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-[95vw] max-w-2xl max-h-[95vh] overflow-y-auto mx-auto rounded-2xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center">
+          <DialogTitle className="text-xl md:text-2xl font-bold text-center">
             Agenda tu <span className="text-primary">Sesión Estratégica</span> con Matías
           </DialogTitle>
-          <p className="text-center text-muted-foreground">
+          <p className="text-center text-muted-foreground text-sm md:text-base">
             Completa tu Evaluación en 60 Segundos
           </p>
         </DialogHeader>
         
-        <form onSubmit={handleSubmit} className="space-y-6 mt-6">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 mt-4 md:mt-6">
           <div>
-            <Label htmlFor="name">Nombre Completo *</Label>
+            <Label htmlFor="name" className="text-sm md:text-base">Nombre Completo *</Label>
             <Input
               id="name"
               type="text"
               required
               value={formData.name}
               onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-              className="mt-2"
+              className="mt-2 h-12 rounded-xl text-sm md:text-base"
               placeholder="Tu nombre completo"
             />
           </div>
 
           <div>
-            <Label htmlFor="email">Correo Electrónico *</Label>
+            <Label htmlFor="email" className="text-sm md:text-base">Correo Electrónico *</Label>
             <Input
               id="email"
               type="email"
               required
               value={formData.email}
               onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-              className="mt-2"
+              className="mt-2 h-12 rounded-xl text-sm md:text-base"
               placeholder="tu@email.com"
             />
           </div>
 
           <div>
-            <Label htmlFor="phone">Número de Teléfono *</Label>
+            <Label htmlFor="phone" className="text-sm md:text-base">Número de Teléfono *</Label>
             <Input
               id="phone"
               type="tel"
               required
               value={formData.phone}
               onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-              className="mt-2"
+              className="mt-2 h-12 rounded-xl text-sm md:text-base"
               placeholder="+56 9 1234 5678"
             />
           </div>
 
           <div>
-            <Label htmlFor="income">Ingreso Mensual (CLP) *</Label>
+            <Label htmlFor="income" className="text-sm md:text-base">Ingreso Mensual (CLP) *</Label>
             <Select value={formData.income} onValueChange={handleIncomeChange}>
-              <SelectTrigger className="mt-2">
+              <SelectTrigger className="mt-2 h-12 rounded-xl text-sm md:text-base">
                 <SelectValue placeholder="Selecciona tu rango de ingresos" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="rounded-xl">
                 <SelectItem value="Menos de $1.000.000">Menos de $1.000.000</SelectItem>
                 <SelectItem value="$1.000.000 - $1.400.000">$1.000.000 - $1.400.000</SelectItem>
                 <SelectItem value="$1.400.000 - $1.800.000">$1.400.000 - $1.800.000</SelectItem>
@@ -200,30 +200,30 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
                   checked={formData.complementsIncome}
                   onCheckedChange={(checked) => setFormData(prev => ({ ...prev, complementsIncome: checked as boolean }))}
                 />
-                <Label htmlFor="complements">¿Complementas renta?</Label>
+                <Label htmlFor="complements" className="text-sm md:text-base">¿Complementas renta?</Label>
               </div>
 
               {formData.complementsIncome && (
                 <div className="grid md:grid-cols-2 gap-4 animate-fade-in">
                   <div>
-                    <Label htmlFor="mainSalary">Tu sueldo líquido</Label>
+                    <Label htmlFor="mainSalary" className="text-sm md:text-base">Tu sueldo líquido</Label>
                     <Input
                       id="mainSalary"
                       type="text"
                       value={formatCurrency(formData.mainSalary)}
                       onChange={(e) => handleSalaryChange('mainSalary', e.target.value)}
-                      className="mt-2"
+                      className="mt-2 h-12 rounded-xl text-sm md:text-base"
                       placeholder="$500.000"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="complementarySalary">Sueldo complementario</Label>
+                    <Label htmlFor="complementarySalary" className="text-sm md:text-base">Sueldo complementario</Label>
                     <Input
                       id="complementarySalary"
                       type="text"
                       value={formatCurrency(formData.complementarySalary)}
                       onChange={(e) => handleSalaryChange('complementarySalary', e.target.value)}
-                      className="mt-2"
+                      className="mt-2 h-12 rounded-xl text-sm md:text-base"
                       placeholder="$300.000"
                     />
                   </div>
@@ -235,7 +235,7 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200"
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 md:py-4 text-sm md:text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 h-12 md:h-14"
           >
             {isSubmitting ? 'Enviando...' : 'QUIERO MI SESIÓN ESTRATÉGICA CON MATÍAS'}
           </Button>

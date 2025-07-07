@@ -50,7 +50,7 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Fixed Header with New Logo */}
+      {/* Fixed Header with Logo */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50">
         <div className="max-w-6xl mx-auto px-3 py-3 flex justify-center">
           <img
@@ -61,39 +61,25 @@ const LandingPage = () => {
         </div>
       </header>
 
-      {/* Hero Section with Investment Image */}
+      {/* Hero Section - Text Only */}
       <section className="relative min-h-screen flex items-center justify-center px-3 py-8 pt-16 md:py-12 md:pt-24">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
-            {/* Text Content */}
-            <div className="flex-1 text-center lg:text-left animate-fade-in">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 lg:mb-6 leading-tight">
-                La <span className="text-primary">"Papita Única"</span> es Real. Pero este es el Error que te Podría Costar Más que solo el Dinero de tu Reserva.
-              </h1>
-              <p className="text-sm md:text-base lg:text-xl text-muted-foreground mb-4 md:mb-6 lg:mb-8">
-                Aquí te revelo el método exacto para blindar tu inversión, evaluando primero tu capacidad de crédito para que compres con total tranquilidad.
-              </p>
-              
-              {/* CTA Button - Improved mobile responsive */}
-              <div className="animate-fade-in-delay-1">
-                <Button
-                  onClick={() => setIsFormPopupOpen(true)}
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-6 lg:px-8 py-3 md:py-3 lg:py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold w-full max-w-xs md:max-w-sm lg:max-w-md mx-auto h-12 md:h-12 lg:h-auto"
-                >
-                  QUIERO MI SESIÓN CON MATÍAS
-                </Button>
-              </div>
-            </div>
-
-            {/* Investment Image */}
-            <div className="flex-1 animate-fade-in-delay-2">
-              <img
-                src="/lovable-uploads/15018611-64cc-40de-a116-b793d50d7c02.png"
-                alt="Encuentra tu próxima inversión con Inmobify"
-                className="w-full max-w-md mx-auto rounded-lg shadow-lg"
-              />
-            </div>
+        <div className="max-w-4xl mx-auto text-center animate-fade-in">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 md:mb-6 lg:mb-8 leading-tight">
+            La <span className="text-primary">"Papita Única"</span> es Real. Pero este es el Error que te Podría Costar Más que solo el Dinero de tu Reserva.
+          </h1>
+          <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground mb-6 md:mb-8 lg:mb-10">
+            Aquí te revelo el método exacto para blindar tu inversión, evaluando primero tu capacidad de crédito para que compres con total tranquilidad.
+          </p>
+          
+          {/* CTA Button */}
+          <div className="animate-fade-in-delay-1">
+            <Button
+              onClick={() => setIsFormPopupOpen(true)}
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold w-full max-w-sm md:max-w-md mx-auto h-12 md:h-14"
+            >
+              QUIERO MI SESIÓN CON MATÍAS
+            </Button>
           </div>
         </div>
       </section>
@@ -198,7 +184,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Matías Credibility Section with Real Photo */}
+      {/* Matías Credibility Section with Larger Photo */}
       <section className="py-12 md:py-16 lg:py-20 px-3 fade-in-section">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8 md:mb-12">
@@ -212,20 +198,19 @@ const LandingPage = () => {
 
           <Card className="bg-card/50 backdrop-blur-sm border-border/50">
             <CardContent className="p-4 md:p-6 lg:p-8">
-              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 mb-4 md:mb-6">
-                <div className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden flex-shrink-0">
+              {/* Large Photo */}
+              <div className="text-center mb-6 md:mb-8">
+                <div className="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-2xl overflow-hidden shadow-lg">
                   <img
                     src="/lovable-uploads/3629a8fa-c346-4989-909d-21a5e609bdb8.png"
                     alt="Matías Furlong - Fundador de Inmobify"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="text-center md:text-left">
-                  <h3 className="text-xl md:text-2xl font-bold mb-2">Matías Furlong</h3>
-                  <p className="text-sm md:text-base text-muted-foreground">
-                    Matías Furlong guía a cientos de clientes a encontrar su hogar ideal en Santiago a través de su servicio de Personal Shopper Inmobiliario.
-                  </p>
-                </div>
+                <h3 className="text-xl md:text-2xl font-bold mt-4 mb-2">Matías Furlong</h3>
+                <p className="text-sm md:text-base text-muted-foreground">
+                  Matías Furlong guía a cientos de clientes a encontrar su hogar ideal en Santiago a través de su servicio de Personal Shopper Inmobiliario.
+                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
@@ -453,34 +438,45 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer with Investment Image */}
       <footer className="py-6 md:py-8 lg:py-12 px-3 border-t border-border/50">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-4 md:mb-6 lg:mb-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Investment Image */}
+          <div className="text-center mb-6 md:mb-8">
             <img
-              src="/lovable-uploads/7b671cb7-3959-4601-b3f8-9834f2ed7d19.png"
-              alt="Inmobify Logo"
-              className="h-6 md:h-8 lg:h-12 mx-auto mb-3 md:mb-4"
+              src="/lovable-uploads/15018611-64cc-40de-a116-b793d50d7c02.png"
+              alt="Encuentra tu próxima inversión con Inmobify"
+              className="w-full max-w-md mx-auto rounded-lg shadow-lg"
             />
           </div>
           
-          <div className="flex justify-center space-x-4 md:space-x-6 mb-4 md:mb-6 lg:mb-8">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-xs md:text-sm">
-              Facebook
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-xs md:text-sm">
-              Instagram
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-xs md:text-sm">
-              LinkedIn
-            </a>
-          </div>
+          <div className="text-center">
+            <div className="mb-4 md:mb-6 lg:mb-8">
+              <img
+                src="/lovable-uploads/7b671cb7-3959-4601-b3f8-9834f2ed7d19.png"
+                alt="Inmobify Logo"
+                className="h-6 md:h-8 lg:h-12 mx-auto mb-3 md:mb-4"
+              />
+            </div>
+            
+            <div className="flex justify-center space-x-4 md:space-x-6 mb-4 md:mb-6 lg:mb-8">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-xs md:text-sm">
+                Facebook
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-xs md:text-sm">
+                Instagram
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-xs md:text-sm">
+                LinkedIn
+              </a>
+            </div>
 
-          <p className="text-xs text-muted-foreground">
-            © 2024 Inmobify. Todos los derechos reservados. | 
-            <a href="#" className="hover:text-primary transition-colors ml-1">Términos y Condiciones</a> | 
-            <a href="#" className="hover:text-primary transition-colors ml-1">Política de Privacidad</a>
-          </p>
+            <p className="text-xs text-muted-foreground">
+              © 2024 Inmobify. Todos los derechos reservados. | 
+              <a href="#" className="hover:text-primary transition-colors ml-1">Términos y Condiciones</a> | 
+              <a href="#" className="hover:text-primary transition-colors ml-1">Política de Privacidad</a>
+            </p>
+          </div>
         </div>
       </footer>
 
