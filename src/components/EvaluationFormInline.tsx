@@ -116,9 +116,9 @@ const EvaluationFormInline = () => {
 
   return (
     <Card className="bg-card/50 backdrop-blur-sm border-border/50">
-      <CardContent className="p-8">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
+      <CardContent className="p-4 md:p-8">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div>
               <Label htmlFor="inline-name">Nombre Completo *</Label>
               <Input
@@ -146,7 +146,7 @@ const EvaluationFormInline = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div>
               <Label htmlFor="inline-phone">Número de Teléfono *</Label>
               <Input
@@ -155,7 +155,7 @@ const EvaluationFormInline = () => {
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                className="mt-2"
+                className="mt-2 h-12"
                 placeholder="+56 9 1234 5678"
               />
             </div>
@@ -163,7 +163,7 @@ const EvaluationFormInline = () => {
             <div>
               <Label htmlFor="inline-income">Ingreso Mensual (CLP) *</Label>
               <Select value={formData.income} onValueChange={handleIncomeChange}>
-                <SelectTrigger className="mt-2">
+                <SelectTrigger className="mt-2 h-12">
                   <SelectValue placeholder="Selecciona tu rango de ingresos" />
                 </SelectTrigger>
                 <SelectContent>
@@ -191,7 +191,7 @@ const EvaluationFormInline = () => {
               </div>
 
               {formData.complementsIncome && (
-                <div className="grid md:grid-cols-2 gap-4 animate-fade-in">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-in">
                   <div>
                     <Label htmlFor="inline-mainSalary">Tu sueldo líquido</Label>
                     <Input
@@ -199,7 +199,7 @@ const EvaluationFormInline = () => {
                       type="text"
                       value={formatCurrency(formData.mainSalary)}
                       onChange={(e) => handleSalaryChange('mainSalary', e.target.value)}
-                      className="mt-2"
+                      className="mt-2 h-12"
                       placeholder="$500.000"
                     />
                   </div>
@@ -210,7 +210,7 @@ const EvaluationFormInline = () => {
                       type="text"
                       value={formatCurrency(formData.complementarySalary)}
                       onChange={(e) => handleSalaryChange('complementarySalary', e.target.value)}
-                      className="mt-2"
+                      className="mt-2 h-12"
                       placeholder="$300.000"
                     />
                   </div>
@@ -223,7 +223,7 @@ const EvaluationFormInline = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 w-full max-w-md mx-auto h-12 md:h-auto"
             >
               {isSubmitting ? 'Enviando...' : 'QUIERO MI SESIÓN ESTRATÉGICA CON MATÍAS'}
             </Button>

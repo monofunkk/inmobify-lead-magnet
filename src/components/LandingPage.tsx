@@ -49,24 +49,35 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Fixed Header with Logo */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-3 py-3 flex justify-center">
+          <img
+            src="/lovable-uploads/56117cfb-584b-4a69-b1a4-14004e8eacbf.png"
+            alt="inmob. Logo"
+            className="h-8 md:h-10"
+          />
+        </div>
+      </header>
+
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
+      <section className="relative min-h-screen flex items-center justify-center px-3 py-12 pt-20 md:py-20 md:pt-32">
         <div className="max-w-6xl mx-auto text-center">
           <div className="animate-fade-in">
-            <h1 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+            <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 leading-tight px-2">
               La <span className="text-primary">"Papita Única"</span> es Real. Pero este es el Error que te Podría Costar Más que solo el Dinero de tu Reserva.
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-base md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-3xl mx-auto px-2">
               Aquí te revelo el método exacto para blindar tu inversión, evaluando primero tu capacidad de crédito para que compres con total tranquilidad.
             </p>
           </div>
 
           {/* CTA Button */}
-          <div className="animate-fade-in-delay-1">
+          <div className="animate-fade-in-delay-1 px-3">
             <Button
               onClick={() => setIsFormPopupOpen(true)}
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-lg font-bold"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-base md:text-lg font-bold w-full max-w-md mx-auto h-12 md:h-auto"
             >
               QUIERO MI SESIÓN ESTRATÉGICA CON MATÍAS
             </Button>
@@ -75,22 +86,22 @@ const LandingPage = () => {
       </section>
 
       {/* Pain Points Section */}
-      <section className="py-20 px-4 fade-in-section">
+      <section className="py-12 md:py-20 px-3 fade-in-section">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-xl md:text-4xl font-bold mb-3 md:mb-4 px-2">
             El Camino <span className="text-primary">Lento y Arriesgado</span> que Muchos Siguen
           </h2>
-          <p className="text-xl text-muted-foreground mb-12">
+          <p className="text-base md:text-xl text-muted-foreground mb-8 md:mb-12 px-2">
             ¿Te has sentido identificado con alguna de estas situaciones?
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             <Card className="bg-destructive/5 backdrop-blur-sm border-destructive/20 hover:scale-105 transition-transform duration-200">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-destructive/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                  <Clock className="w-6 h-6 text-destructive" />
+              <CardContent className="p-4 md:p-6">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-destructive/20 rounded-lg flex items-center justify-center mb-3 md:mb-4 mx-auto">
+                  <Clock className="w-5 h-5 md:w-6 md:h-6 text-destructive" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Meses de Búsqueda a Ciegas</h3>
+                <h3 className="text-base md:text-lg font-semibold mb-2">Meses de Búsqueda a Ciegas</h3>
                 <p className="text-sm text-muted-foreground">
                   Inviertes tu valioso tiempo buscando proyectos sin saber con certeza si realmente puedes financiarlos.
                 </p>
@@ -98,11 +109,11 @@ const LandingPage = () => {
             </Card>
 
             <Card className="bg-destructive/5 backdrop-blur-sm border-destructive/20 hover:scale-105 transition-transform duration-200">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-destructive/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                  <DollarSign className="w-6 h-6 text-destructive" />
+              <CardContent className="p-4 md:p-6">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-destructive/20 rounded-lg flex items-center justify-center mb-3 md:mb-4 mx-auto">
+                  <DollarSign className="w-5 h-5 md:w-6 md:h-6 text-destructive" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Reservar y Arriesgar tu Dinero</h3>
+                <h3 className="text-base md:text-lg font-semibold mb-2">Reservar y Arriesgar tu Dinero</h3>
                 <p className="text-sm text-muted-foreground">
                   Pagas una reserva con la emoción del momento, antes de tener la aprobación final del banco.
                 </p>
@@ -110,11 +121,11 @@ const LandingPage = () => {
             </Card>
 
             <Card className="bg-destructive/5 backdrop-blur-sm border-destructive/20 hover:scale-105 transition-transform duration-200">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-destructive/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                  <Frown className="w-6 h-6 text-destructive" />
+              <CardContent className="p-4 md:p-6">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-destructive/20 rounded-lg flex items-center justify-center mb-3 md:mb-4 mx-auto">
+                  <Frown className="w-5 h-5 md:w-6 md:h-6 text-destructive" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Crédito Rechazado, Dinero Perdido</h3>
+                <h3 className="text-base md:text-lg font-semibold mb-2">Crédito Rechazado, Dinero Perdido</h3>
                 <p className="text-sm text-muted-foreground">
                   El banco no te aprueba el monto y pierdes parte o la totalidad de tu reserva y toda tu motivación.
                 </p>
@@ -125,16 +136,16 @@ const LandingPage = () => {
       </section>
 
       {/* Solution Section */}
-      <section className="py-20 px-4 bg-card/30 fade-in-section">
+      <section className="py-12 md:py-20 px-3 bg-card/30 fade-in-section">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-xl md:text-4xl font-bold mb-3 md:mb-4 px-2">
             Nuestro Método: <span className="text-primary">Certeza, Eficiencia y Tranquilidad</span>
           </h2>
-          <p className="text-xl text-muted-foreground mb-12">
+          <p className="text-base md:text-xl text-muted-foreground mb-8 md:mb-12 px-2">
             La forma inteligente de invertir sin riesgos innecesarios
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:scale-105 transition-transform duration-200">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
@@ -188,22 +199,22 @@ const LandingPage = () => {
 
           <Card className="bg-card/50 backdrop-blur-sm border-border/50">
             <CardContent className="p-8">
-              <div className="flex flex-col md:flex-row items-center gap-6 mb-6">
-                <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center">
-                  <User className="w-12 h-12 text-primary" />
+              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 mb-6">
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-primary/20 rounded-full flex items-center justify-center overflow-hidden">
+                  <User className="w-10 h-10 md:w-12 md:h-12 text-primary" />
                 </div>
                 <div className="text-center md:text-left">
-                  <h3 className="text-2xl font-bold mb-2">Matías Furlong</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-xl md:text-2xl font-bold mb-2">Matías Furlong</h3>
+                  <p className="text-sm md:text-base text-muted-foreground">
                     Matías Furlong guía a cientos de clientes a encontrar su hogar ideal en Santiago a través de su servicio de Personal Shopper Inmobiliario.
                   </p>
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 <div className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                  <p className="text-sm">Pionero en asesoría 100% personalizada, enfocada en los intereses del comprador para un proceso fácil y seguro.</p>
+                  <Check className="w-4 h-4 md:w-5 md:h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <p className="text-xs md:text-sm">Pionero en asesoría 100% personalizada, enfocada en los intereses del comprador para un proceso fácil y seguro.</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
@@ -268,11 +279,11 @@ const LandingPage = () => {
           </div>
 
           {/* CTA Button after testimonials */}
-          <div className="mt-12">
+          <div className="mt-8 md:mt-12 px-3">
             <Button
               onClick={() => setIsFormPopupOpen(true)}
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-lg font-bold"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-base md:text-lg font-bold w-full max-w-md mx-auto h-12 md:h-auto"
             >
               QUIERO MI SESIÓN ESTRATÉGICA CON MATÍAS
             </Button>
@@ -370,15 +381,15 @@ const LandingPage = () => {
             </CardContent>
           </Card>
 
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 md:mb-8 px-3">
             <Button
               onClick={() => setIsFormPopupOpen(true)}
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-lg font-bold mb-4"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-base md:text-lg font-bold mb-4 w-full max-w-md mx-auto h-12 md:h-auto"
             >
               QUIERO AGENDAR MI SESIÓN CON MATÍAS
             </Button>
-            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xs md:text-sm text-muted-foreground max-w-2xl mx-auto px-2">
               Llena el siguiente formulario con tus datos. Mi asistente, Josefa, te contactará personalmente para coordinar un espacio en mi agenda para nuestra sesión estratégica. Es 100% gratuita y sin compromiso.
             </p>
           </div>
@@ -388,29 +399,29 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 border-t border-border/50">
+      <footer className="py-8 md:py-12 px-3 border-t border-border/50">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8">
+          <div className="mb-6 md:mb-8">
             <img
               src="/lovable-uploads/44b7caa2-ff79-41bf-b3dc-b39c756fcfaa.png"
               alt="Inmobify Logo"
-              className="h-12 mx-auto mb-4"
+              className="h-8 md:h-12 mx-auto mb-4"
             />
           </div>
           
-          <div className="flex justify-center space-x-6 mb-8">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+          <div className="flex justify-center space-x-4 md:space-x-6 mb-6 md:mb-8">
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">
               Facebook
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">
               Instagram
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">
               LinkedIn
             </a>
           </div>
 
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs md:text-sm text-muted-foreground px-2">
             © 2024 Inmobify. Todos los derechos reservados. | 
             <a href="#" className="hover:text-primary transition-colors ml-1">Términos y Condiciones</a> | 
             <a href="#" className="hover:text-primary transition-colors ml-1">Política de Privacidad</a>
