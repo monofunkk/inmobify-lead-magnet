@@ -127,7 +127,7 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">
-            Da el <span className="text-primary">Primer Paso</span>
+            Agenda tu <span className="text-primary">Sesión Estratégica</span> con Matías
           </DialogTitle>
           <p className="text-center text-muted-foreground">
             Completa tu Evaluación en 60 Segundos
@@ -237,7 +237,7 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
             disabled={isSubmitting}
             className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200"
           >
-            {isSubmitting ? 'Enviando...' : 'Sí, Quiero Ser Inversionista 🏠'}
+            {isSubmitting ? 'Enviando...' : 'QUIERO MI SESIÓN ESTRATÉGICA CON MATÍAS'}
           </Button>
         </form>
       </DialogContent>

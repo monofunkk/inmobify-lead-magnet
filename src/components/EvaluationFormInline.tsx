@@ -225,7 +225,7 @@ const EvaluationFormInline = () => {
               disabled={isSubmitting}
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200"
             >
-              {isSubmitting ? 'Enviando...' : 'Evalúame Para Invertir 🏠'}
+              {isSubmitting ? 'Enviando...' : 'QUIERO MI SESIÓN ESTRATÉGICA CON MATÍAS'}
             </Button>
           </div>
         </form>
