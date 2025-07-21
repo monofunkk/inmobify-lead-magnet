@@ -13,43 +13,27 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       let inputValue = e.target.value;
       
-      // Remove any non-digit characters except + at the beginning
-      inputValue = inputValue.replace(/[^\d+]/g, '');
+      // Remove any non-digit characters
+      inputValue = inputValue.replace(/\D/g, '');
       
-      // If it starts with +56, keep it as is
-      if (inputValue.startsWith('+56')) {
-        onChange(inputValue);
-        return;
-      }
-      
-      // If it starts with 56, add the +
+      // If it starts with 56, remove it since we'll add +56 automatically
       if (inputValue.startsWith('56')) {
-        onChange(`+${inputValue}`);
-        return;
+        inputValue = inputValue.slice(2);
       }
       
-      // If it starts with 9 (Chilean mobile), add +56
-      if (inputValue.startsWith('9')) {
-        onChange(`+56${inputValue}`);
-        return;
+      // If it doesn't start with 9, and it's not empty, add 9
+      if (inputValue.length > 0 && !inputValue.startsWith('9')) {
+        inputValue = '9' + inputValue;
       }
       
-      // If it's just digits and not starting with the above, add +56
-      if (inputValue.length > 0 && !inputValue.startsWith('+')) {
-        onChange(`+56${inputValue}`);
-        return;
-      }
+      // Build the full phone number with +56
+      const fullPhoneNumber = inputValue ? `+56${inputValue}` : '';
       
-      // If empty or just +, allow it
-      if (inputValue === '' || inputValue === '+') {
-        onChange(inputValue);
-        return;
-      }
-      
-      onChange(inputValue);
+      onChange(fullPhoneNumber);
     };
 
-    const displayValue = value || '';
+    // Extract just the number part after +56 for display
+    const displayValue = value.startsWith('+56') ? value.slice(3) : value;
 
     return (
       <div className="relative">
