@@ -10,6 +10,16 @@ const VSLSection = ({ onCTAClick }: VSLSectionProps) => {
   return (
     <section className="py-8 md:py-12 lg:py-16 px-3 safe-area-px">
       <div className="max-w-4xl mx-auto text-center">
+        {/* Título Papita Única */}
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-3">
+            Descubre la <span className="text-primary">"Papita Única"</span>
+          </h1>
+          <p className="text-sm md:text-base lg:text-lg text-muted-foreground">
+            La oportunidad de inversión que todos buscan pero pocos encuentran
+          </p>
+        </div>
+
         {/* Video Container */}
         <div className="relative mb-6 md:mb-8 lg:mb-12">
           <div className="relative w-full max-w-3xl mx-auto">
