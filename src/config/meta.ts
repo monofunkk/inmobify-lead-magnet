@@ -1,32 +1,21 @@
 
 // Meta Pixel Configuration
-// Replace these values with your actual Meta Business Manager credentials
-
 export const META_CONFIG = {
-  // Replace with your actual Meta Pixel ID from Business Manager
-  PIXEL_ID: 'YOUR_PIXEL_ID',
+  // Your actual Meta Pixel ID
+  PIXEL_ID: '711342000470591',
   
-  // Replace with your actual Access Token with ads_management permissions
-  ACCESS_TOKEN: 'YOUR_ACCESS_TOKEN',
+  // Your actual Access Token with ads_management permissions
+  ACCESS_TOKEN: 'EAAKt1ZCpUIw4BPPiAgIISLE9ZAqZC7feVZCwDpRmb6cZA6WIPiuSlZBqBQ9bPOkeZA3QQIEqmrd29uMeTTrZBwg2sSgKVpPHljNqquxQZC3EELqoLJrmEhkW4OZCIsFbJ6xOMY2GMQqwruegubO65MtkJu09Eygqipl7K9oZA5ZC6D2bFwH0gfly4wHL7a6LKZCQZAJKFOZBgZDZD',
   
   // API Version
   API_VERSION: 'v18.0',
   
-  // Test Mode (set to false in production)
-  TEST_MODE: true
+  // Production mode
+  TEST_MODE: false
 };
-
-// Instructions for setup:
-// 1. Go to Meta Business Manager (business.facebook.com)
-// 2. Navigate to Events Manager
-// 3. Create or select your Pixel
-// 4. Copy the Pixel ID and replace YOUR_PIXEL_ID
-// 5. Generate an Access Token with ads_management permissions
-// 6. Replace YOUR_ACCESS_TOKEN with your actual token
-// 7. Set TEST_MODE to false when ready for production
 
 console.log('📊 Meta Pixel Configuration:', {
   pixelId: META_CONFIG.PIXEL_ID,
   testMode: META_CONFIG.TEST_MODE,
-  needsSetup: META_CONFIG.PIXEL_ID === 'YOUR_PIXEL_ID'
+  needsSetup: false
 });

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -5,6 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Star, MapPin, Building, Wifi, Car, Clock, DollarSign, Frown, Check, Compass, Handshake, User } from 'lucide-react';
 import EvaluationFormPopup from './EvaluationFormPopup';
 import EvaluationFormInline from './EvaluationFormInline';
+import VSLSection from './VSLSection';
 import Particles from './Particles';
 
 const LandingPage = () => {
@@ -99,6 +101,9 @@ const LandingPage = () => {
             </div>
           </div>
         </section>
+
+        {/* VSL Section - Added after Hero */}
+        <VSLSection onCTAClick={() => setIsFormPopupOpen(true)} />
 
         {/* Pain Points Section */}
         <section className="py-8 md:py-12 lg:py-20 px-3 fade-in-section">
