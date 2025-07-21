@@ -57,23 +57,7 @@ const LandingPage = () => {
         </header>
 
         {/* Hero Section - Text Only */}
-        <section className="relative min-h-screen flex items-center justify-center px-3 py-8 pt-16 md:py-12 md:pt-24">
-          <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 md:mb-6 lg:mb-8 leading-tight">
-              La <span className="text-primary">"Papita Única"</span> es Real. Pero este es el Error que te Podría Costar Más que solo el Dinero de tu Reserva.
-            </h1>
-            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground mb-6 md:mb-8 lg:mb-10">
-              Aquí te revelo el método exacto para blindar tu inversión, evaluando primero tu capacidad de crédito para que compres con total tranquilidad.
-            </p>
-            
-            {/* CTA Button */}
-            <div className="animate-fade-in-delay-1">
-              <Button onClick={() => setIsFormPopupOpen(true)} size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold w-full max-w-sm md:max-w-md mx-auto h-12 md:h-14">
-                QUIERO MI SESIÓN CON MATÍAS
-              </Button>
-            </div>
-          </div>
-        </section>
+        
 
         {/* VSL Section - Added after Hero */}
         <VSLSection onCTAClick={() => setIsFormPopupOpen(true)} />
