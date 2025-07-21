@@ -14,7 +14,7 @@ const VSLSection: React.FC<VSLSectionProps> = ({
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">
             La <span className="text-primary">"Papita Única"</span> es Real. Pero este es el Error que te Podría Costar Más que solo el Dinero de tu Reserva.
           </h2>
-          <p className="md:text-xl text-muted-foreground mb-6 md:mb-8 text-base">Aquí te revelo el método exacto para blindar tu inversión, evaluando primero tu capacidad de crédito para que compres con total tranquilidad.</p>
+          
         </div>
 
         <Card className="bg-card/50 backdrop-blur-sm border-border/50 mb-6 md:mb-8">
