@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { Input } from './input';
 import { cn } from '@/lib/utils';
 
-interface PhoneInputProps extends React.ComponentProps<typeof Input> {
+interface PhoneInputProps extends Omit<React.ComponentProps<typeof Input>, 'onChange'> {
   value: string;
   onChange: (value: string) => void;
 }
