@@ -28,7 +28,6 @@ const VSLSection: React.FC<VSLSectionProps> = ({ onCTAClick }) => {
               <wistia-player 
                 media-id="77cc5muon3" 
                 aspect="1.7777777777777777"
-                className="w-full"
               />
             </div>
 
