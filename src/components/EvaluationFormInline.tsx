@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { useFormPrefill } from '@/hooks/useFormPrefill';
 import ComplementIncomeModal from './ComplementIncomeModal';
 import { 
   validateIndividualIncome, 
@@ -28,6 +29,9 @@ const EvaluationFormInline = () => {
   const [showComplementModal, setShowComplementModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  // Use form prefill hook
+  const urlParams = useFormPrefill(setFormData, formData);
 
   const formatCurrency = (value: string) => {
     const numericValue = value.replace(/\D/g, '');
@@ -77,7 +81,8 @@ const EvaluationFormInline = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    console.log('🚀 Inline form submission started:', formData);
+    console.log('🚀 Inline form submission started with URL params:', urlParams);
+    console.log('📋 Form data:', formData);
 
     try {
       const incomeAmount = parseIncomeFromRange(formData.income);
@@ -282,6 +287,8 @@ const EvaluationFormInline = () => {
                   <Input
                     id="inline-phone"
                     type="tel"
+                    inputMode="numeric"
+                    pattern="[0-9+\-\s]*"
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
@@ -327,6 +334,8 @@ const EvaluationFormInline = () => {
                         <Input
                           id="inline-mainSalary"
                           type="text"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
                           value={formatCurrency(formData.mainSalary)}
                           onChange={(e) => handleSalaryChange('mainSalary', e.target.value)}
                           className="mt-2 h-12 md:h-14 rounded-xl text-sm md:text-base"
@@ -338,6 +347,8 @@ const EvaluationFormInline = () => {
                         <Input
                           id="inline-complementarySalary"
                           type="text"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
                           value={formatCurrency(formData.complementarySalary)}
                           onChange={(e) => handleSalaryChange('complementarySalary', e.target.value)}
                           className="mt-2 h-12 md:h-14 rounded-xl text-sm md:text-base"
@@ -353,7 +364,7 @@ const EvaluationFormInline = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-6 lg:px-8 py-3 md:py-4 text-sm md:text-base lg:text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 w-full max-w-xs md:max-w-sm lg:max-w-md mx-auto h-12 md:h-14"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-6 lg:px-8 py-3 md:py-4 text-sm md:text-base lg:text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 w-full max-w-xs md:max-w-sm lg:max-w-md mx-auto h-12 md:h-14 min-h-[44px]"
                 >
                   {isSubmitting ? 'Enviando...' : 'QUIERO MI SESIÓN CON MATÍAS'}
                 </Button>

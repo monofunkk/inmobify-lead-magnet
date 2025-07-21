@@ -145,7 +145,7 @@ const ComplementIncomeModal = ({
               required
               value={complementData.name}
               onChange={(e) => setComplementData(prev => ({ ...prev, name: e.target.value }))}
-              className="mt-2 h-12 rounded-xl"
+              className="mt-2 h-12 md:h-14 rounded-xl"
               placeholder="Nombre completo"
             />
           </div>
@@ -160,7 +160,7 @@ const ComplementIncomeModal = ({
               required
               value={complementData.email}
               onChange={(e) => setComplementData(prev => ({ ...prev, email: e.target.value }))}
-              className="mt-2 h-12 rounded-xl"
+              className="mt-2 h-12 md:h-14 rounded-xl"
               placeholder="correo@email.com"
             />
           </div>
@@ -172,10 +172,12 @@ const ComplementIncomeModal = ({
             <Input
               id="complement-phone"
               type="tel"
+              inputMode="numeric"
+              pattern="[0-9+\-\s]*"
               required
               value={complementData.phone}
               onChange={(e) => setComplementData(prev => ({ ...prev, phone: e.target.value }))}
-              className="mt-2 h-12 rounded-xl"
+              className="mt-2 h-12 md:h-14 rounded-xl"
               placeholder="+56 9 1234 5678"
             />
           </div>
@@ -187,10 +189,12 @@ const ComplementIncomeModal = ({
             <Input
               id="complement-income"
               type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
               required
               value={formatCurrency(complementData.income)}
               onChange={(e) => handleIncomeChange(e.target.value)}
-              className="mt-2 h-12 rounded-xl"
+              className="mt-2 h-12 md:h-14 rounded-xl"
               placeholder="$800.000"
             />
           </div>
@@ -204,7 +208,7 @@ const ComplementIncomeModal = ({
           <Button
             type="submit"
             disabled={isSubmitting || !isQualified}
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 md:py-4 text-sm md:text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 h-12 md:h-14"
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 md:py-4 text-sm md:text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 h-12 md:h-14 min-h-[44px]"
           >
             {isSubmitting ? 'Enviando...' : 'CONTINUAR CON EVALUACIÓN'}
           </Button>

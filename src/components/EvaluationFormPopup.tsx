@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
+import { useFormPrefill } from '@/hooks/useFormPrefill';
 import ComplementIncomeModal from './ComplementIncomeModal';
 import { 
   validateIndividualIncome, 
@@ -33,6 +34,9 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
   const [showComplementModal, setShowComplementModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  // Use form prefill hook
+  const urlParams = useFormPrefill(setFormData, formData);
 
   const formatCurrency = (value: string) => {
     const numericValue = value.replace(/\D/g, '');
@@ -82,7 +86,8 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    console.log('🚀 Form submission started:', formData);
+    console.log('🚀 Form submission started with URL params:', urlParams);
+    console.log('📋 Form data:', formData);
 
     try {
       const incomeAmount = parseIncomeFromRange(formData.income);
@@ -272,7 +277,7 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                className="mt-2 h-12 rounded-xl text-sm md:text-base"
+                className="mt-2 h-12 md:h-14 rounded-xl text-sm md:text-base"
                 placeholder="Tu nombre completo"
               />
             </div>
@@ -285,7 +290,7 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                className="mt-2 h-12 rounded-xl text-sm md:text-base"
+                className="mt-2 h-12 md:h-14 rounded-xl text-sm md:text-base"
                 placeholder="tu@email.com"
               />
             </div>
@@ -295,10 +300,12 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
               <Input
                 id="phone"
                 type="tel"
+                inputMode="numeric"
+                pattern="[0-9+\-\s]*"
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                className="mt-2 h-12 rounded-xl text-sm md:text-base"
+                className="mt-2 h-12 md:h-14 rounded-xl text-sm md:text-base"
                 placeholder="+56 9 1234 5678"
               />
             </div>
@@ -306,7 +313,7 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
             <div>
               <Label htmlFor="income" className="text-sm md:text-base">Ingreso Mensual (CLP) *</Label>
               <Select value={formData.income} onValueChange={handleIncomeChange}>
-                <SelectTrigger className="mt-2 h-12 rounded-xl text-sm md:text-base">
+                <SelectTrigger className="mt-2 h-12 md:h-14 rounded-xl text-sm md:text-base">
                   <SelectValue placeholder="Selecciona tu rango de ingresos" />
                 </SelectTrigger>
                 <SelectContent className="rounded-xl">
@@ -339,9 +346,11 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
                       <Input
                         id="mainSalary"
                         type="text"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={formatCurrency(formData.mainSalary)}
                         onChange={(e) => handleSalaryChange('mainSalary', e.target.value)}
-                        className="mt-2 h-12 rounded-xl text-sm md:text-base"
+                        className="mt-2 h-12 md:h-14 rounded-xl text-sm md:text-base"
                         placeholder="$500.000"
                       />
                     </div>
@@ -350,9 +359,11 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
                       <Input
                         id="complementarySalary"
                         type="text"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={formatCurrency(formData.complementarySalary)}
                         onChange={(e) => handleSalaryChange('complementarySalary', e.target.value)}
-                        className="mt-2 h-12 rounded-xl text-sm md:text-base"
+                        className="mt-2 h-12 md:h-14 rounded-xl text-sm md:text-base"
                         placeholder="$300.000"
                       />
                     </div>
@@ -364,7 +375,7 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 md:py-4 text-sm md:text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 h-12 md:h-14"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 md:py-4 text-sm md:text-lg font-semibold rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 h-12 md:h-14 min-h-[44px]"
             >
               {isSubmitting ? 'Enviando...' : 'QUIERO MI SESIÓN ESTRATÉGICA CON MATÍAS'}
             </Button>
