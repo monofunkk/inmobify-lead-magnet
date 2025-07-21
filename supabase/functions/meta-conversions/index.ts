@@ -44,6 +44,14 @@ interface ConversionPayload {
   test_event_code?: string;
 }
 
+const hashData = async (data: string): Promise<string> => {
+  const encoder = new TextEncoder();
+  const dataBuffer = encoder.encode(data.toLowerCase().trim());
+  const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+};
+
 const getClientIP = (req: Request): string => {
   const forwardedFor = req.headers.get('x-forwarded-for');
   const realIP = req.headers.get('x-real-ip');
@@ -62,9 +70,12 @@ const getClientIP = (req: Request): string => {
   return '127.0.0.1'; // fallback
 };
 
-const enhanceEventWithServerData = (event: ConversionEvent, req: Request): ConversionEvent => {
+const enhanceEventWithServerData = async (event: ConversionEvent, req: Request): Promise<ConversionEvent> => {
   const clientIP = getClientIP(req);
   const userAgent = req.headers.get('user-agent') || '';
+  
+  // Hash the country parameter properly
+  const hashedCountry = await hashData('cl');
   
   return {
     ...event,
@@ -72,6 +83,7 @@ const enhanceEventWithServerData = (event: ConversionEvent, req: Request): Conve
       ...event.user_data,
       client_ip_address: clientIP,
       client_user_agent: userAgent,
+      country: hashedCountry // Now properly hashed
     }
   };
 };
@@ -93,7 +105,8 @@ const sendToMetaAPI = async (payload: ConversionPayload, pixelId: string, access
       event_name: e.event_name,
       event_id: e.event_id,
       value: e.custom_data.value,
-      income_type: e.custom_data.income_type
+      income_type: e.custom_data.income_type,
+      country_hashed: e.user_data.country ? 'YES' : 'NO'
     }))
   });
   
@@ -160,8 +173,10 @@ serve(async (req) => {
       );
     }
     
-    // Enhance events with server-side data
-    const enhancedEvents = payload.events.map(event => enhanceEventWithServerData(event, req));
+    // Enhance events with server-side data and properly hash country
+    const enhancedEvents = await Promise.all(
+      payload.events.map(event => enhanceEventWithServerData(event, req))
+    );
     
     const enhancedPayload = {
       ...payload,
@@ -172,7 +187,8 @@ serve(async (req) => {
       eventCount: enhancedEvents.length,
       clientIP: getClientIP(req),
       userAgent: req.headers.get('user-agent')?.substring(0, 50) + '...',
-      pixelId: pixelId
+      pixelId: pixelId,
+      countryHashed: enhancedEvents[0]?.user_data?.country ? 'YES' : 'NO'
     });
     
     // Send to Meta with retry logic

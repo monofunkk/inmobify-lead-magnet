@@ -58,7 +58,7 @@ const prepareAdvancedMatching = async (formData: any, complementData?: any) => {
     fn: await hashData(formData.name.split(' ')[0]),
     ln: await hashData(formData.name.split(' ').slice(1).join(' ') || formData.name.split(' ')[0]),
     ct: await hashData('santiago'), // Default city
-    country: 'cl',
+    // Remove country from here - will be added in Edge Function
     external_id: `broker_${Date.now()}`,
     fbp,
     fbc,

@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PhoneInput } from '@/components/ui/phone-input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -69,6 +71,13 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
     }));
   };
 
+  const handlePhoneChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      phone: value
+    }));
+  };
+
   const parseIncomeFromRange = (incomeRange: string): number => {
     const ranges: { [key: string]: number } = {
       'Menos de $1.000.000': 900000,
@@ -84,6 +93,17 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate phone number
+    if (!formData.phone.startsWith('+56')) {
+      toast({
+        title: "Número de teléfono inválido",
+        description: "Por favor ingresa un número de teléfono chileno válido.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
     
     console.log('🚀 Form submission started with URL params:', urlParams);
@@ -297,16 +317,12 @@ const EvaluationFormPopup = ({ isOpen, onClose }: EvaluationFormPopupProps) => {
 
             <div>
               <Label htmlFor="phone" className="text-sm md:text-base">Número de Teléfono *</Label>
-              <Input
+              <PhoneInput
                 id="phone"
-                type="tel"
-                inputMode="numeric"
-                pattern="[0-9+\-\s]*"
                 required
                 value={formData.phone}
-                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                onChange={handlePhoneChange}
                 className="mt-2 h-12 md:h-14 rounded-xl text-sm md:text-base"
-                placeholder="+56 9 1234 5678"
               />
             </div>
 
