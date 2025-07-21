@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -8,62 +7,44 @@ import EvaluationFormPopup from './EvaluationFormPopup';
 import EvaluationFormInline from './EvaluationFormInline';
 import VSLSection from './VSLSection';
 import Particles from './Particles';
-
 const LandingPage = () => {
   const [isFormPopupOpen, setIsFormPopupOpen] = useState(false);
-
-  const testimonials = [
-    {
-      name: "María González",
-      profession: "Ingeniera Comercial",
-      image: "https://randomuser.me/api/portraits/women/1.jpg",
-      quote: "Inmobify hizo que mi primera inversión fuera simple y rentable. ¡El mejor paso financiero que he dado!"
-    },
-    {
-      name: "Carlos Mendoza",
-      profession: "Contador Auditor", 
-      image: "https://randomuser.me/api/portraits/men/2.jpg",
-      quote: "La asesoría fue excepcional. Ahora tengo mi departamento y mi patrimonio está creciendo cada mes."
-    },
-    {
-      name: "Andrea Silva",
-      profession: "Arquitecta",
-      image: "https://randomuser.me/api/portraits/women/3.jpg",
-      quote: "Excelente ubicación y proyecto. La plusvalía ya se nota y apenas llevo 6 meses como propietaria."
-    }
-  ];
-
+  const testimonials = [{
+    name: "María González",
+    profession: "Ingeniera Comercial",
+    image: "https://randomuser.me/api/portraits/women/1.jpg",
+    quote: "Inmobify hizo que mi primera inversión fuera simple y rentable. ¡El mejor paso financiero que he dado!"
+  }, {
+    name: "Carlos Mendoza",
+    profession: "Contador Auditor",
+    image: "https://randomuser.me/api/portraits/men/2.jpg",
+    quote: "La asesoría fue excepcional. Ahora tengo mi departamento y mi patrimonio está creciendo cada mes."
+  }, {
+    name: "Andrea Silva",
+    profession: "Arquitecta",
+    image: "https://randomuser.me/api/portraits/women/3.jpg",
+    quote: "Excelente ubicación y proyecto. La plusvalía ya se nota y apenas llevo 6 meses como propietaria."
+  }];
   useEffect(() => {
     // Trigger fade-in animations on scroll
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate-fade-in');
         }
       });
-    }, { threshold: 0.1 });
-
+    }, {
+      threshold: 0.1
+    });
     document.querySelectorAll('.fade-in-section').forEach(el => {
       observer.observe(el);
     });
-
     return () => observer.disconnect();
   }, []);
-
-  return (
-    <div className="min-h-screen bg-background text-foreground relative">
+  return <div className="min-h-screen bg-background text-foreground relative">
       {/* Background Particles */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <Particles
-          particleColors={['#7ed956', '#ffffff', '#7ed956']}
-          particleCount={150}
-          particleSpread={15}
-          speed={0.05}
-          particleBaseSize={80}
-          moveParticlesOnHover={false}
-          alphaParticles={true}
-          disableRotation={false}
-        />
+        <Particles particleColors={['#7ed956', '#ffffff', '#7ed956']} particleCount={150} particleSpread={15} speed={0.05} particleBaseSize={80} moveParticlesOnHover={false} alphaParticles={true} disableRotation={false} />
       </div>
 
       {/* Content Wrapper */}
@@ -71,11 +52,7 @@ const LandingPage = () => {
         {/* Fixed Header with Logo */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50">
           <div className="max-w-6xl mx-auto px-3 py-3 flex justify-center">
-            <img
-              src="/lovable-uploads/7b671cb7-3959-4601-b3f8-9834f2ed7d19.png"
-              alt="inmob. Logo"
-              className="h-8 md:h-10"
-            />
+            <img src="/lovable-uploads/7b671cb7-3959-4601-b3f8-9834f2ed7d19.png" alt="inmob. Logo" className="h-8 md:h-10" />
           </div>
         </header>
 
@@ -91,11 +68,7 @@ const LandingPage = () => {
             
             {/* CTA Button */}
             <div className="animate-fade-in-delay-1">
-              <Button
-                onClick={() => setIsFormPopupOpen(true)}
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold w-full max-w-sm md:max-w-md mx-auto h-12 md:h-14"
-              >
+              <Button onClick={() => setIsFormPopupOpen(true)} size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold w-full max-w-sm md:max-w-md mx-auto h-12 md:h-14">
                 QUIERO MI SESIÓN CON MATÍAS
               </Button>
             </div>
@@ -222,11 +195,7 @@ const LandingPage = () => {
                 {/* Large Photo */}
                 <div className="text-center mb-6 md:mb-8">
                   <div className="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-2xl overflow-hidden shadow-lg">
-                    <img
-                      src="/lovable-uploads/3629a8fa-c346-4989-909d-21a5e609bdb8.png"
-                      alt="Matías Furlong - Fundador de Inmobify"
-                      className="w-full h-full object-cover"
-                    />
+                    <img src="/lovable-uploads/3629a8fa-c346-4989-909d-21a5e609bdb8.png" alt="Matías Furlong - Fundador de Inmobify" className="w-full h-full object-cover" />
                   </div>
                   <h3 className="text-xl md:text-2xl font-bold mt-4 mb-2">Matías Furlong</h3>
                   <p className="text-sm md:text-base text-muted-foreground">
@@ -271,11 +240,7 @@ const LandingPage = () => {
             <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
               {/* Office Image */}
               <div className="flex-1 animate-fade-in">
-                <img
-                  src="/lovable-uploads/b5189b58-d61a-4786-a25d-9210b4b85f9c.png"
-                  alt="Oficina Inmobify en Antonio Bellet 193"
-                  className="w-full rounded-lg shadow-lg"
-                />
+                <img src="/lovable-uploads/b5189b58-d61a-4786-a25d-9210b4b85f9c.png" alt="Oficina Inmobify en Antonio Bellet 193" className="w-full rounded-lg shadow-lg" />
               </div>
 
               {/* Office Info */}
@@ -291,11 +256,7 @@ const LandingPage = () => {
                   Te invitamos a conocer nuestras oficinas en el corazón de Providencia. Aquí es donde trabajamos día a día para encontrar las mejores oportunidades de inversión para nuestros clientes.
                 </p>
                 
-                <Button
-                  onClick={() => setIsFormPopupOpen(true)}
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-6 lg:px-8 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold w-full max-w-xs md:max-w-sm mx-auto lg:mx-0 h-12"
-                >
+                <Button onClick={() => setIsFormPopupOpen(true)} size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-6 lg:px-8 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold w-full max-w-xs md:max-w-sm mx-auto lg:mx-0 h-12">
                   AGENDA TU CITA PRESENCIAL
                 </Button>
               </div>
@@ -314,38 +275,26 @@ const LandingPage = () => {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-card/50 backdrop-blur-sm border-border/50">
+              {testimonials.map((testimonial, index) => <Card key={index} className="bg-card/50 backdrop-blur-sm border-border/50">
                   <CardContent className="p-4 md:p-6">
                     <div className="flex items-center mb-4">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        className="w-10 h-10 md:w-12 md:h-12 rounded-full mr-3 md:mr-4"
-                      />
+                      <img src={testimonial.image} alt={testimonial.name} className="w-10 h-10 md:w-12 md:h-12 rounded-full mr-3 md:mr-4" />
                       <div className="text-left">
                         <h4 className="text-sm md:text-base font-semibold">{testimonial.name}</h4>
                         <p className="text-xs md:text-sm text-muted-foreground">{testimonial.profession}</p>
                       </div>
                     </div>
                     <div className="flex mb-3">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-primary text-primary" />
-                      ))}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-primary text-primary" />)}
                     </div>
                     <p className="text-xs md:text-sm italic">"{testimonial.quote}"</p>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
 
             {/* CTA Button after testimonials */}
             <div className="mt-8 md:mt-12">
-              <Button
-                onClick={() => setIsFormPopupOpen(true)}
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-6 lg:px-8 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold w-full max-w-xs md:max-w-sm lg:max-w-md mx-auto h-12"
-              >
+              <Button onClick={() => setIsFormPopupOpen(true)} size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-6 lg:px-8 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold w-full max-w-xs md:max-w-sm lg:max-w-md mx-auto h-12">
                 QUIERO MI SESIÓN CON MATÍAS
               </Button>
             </div>
@@ -443,11 +392,7 @@ const LandingPage = () => {
             </Card>
 
             <div className="text-center mb-4 md:mb-6">
-              <Button
-                onClick={() => setIsFormPopupOpen(true)}
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-6 lg:px-8 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold mb-3 md:mb-4 w-full max-w-xs md:max-w-sm lg:max-w-md mx-auto h-12"
-              >
+              <Button onClick={() => setIsFormPopupOpen(true)} size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 md:px-6 lg:px-8 py-3 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 text-sm md:text-base lg:text-lg font-bold mb-3 md:mb-4 w-full max-w-xs md:max-w-sm lg:max-w-md mx-auto h-12">
                 AGENDAR MI SESIÓN CON MATÍAS
               </Button>
               <p className="text-xs md:text-sm text-muted-foreground max-w-2xl mx-auto">
@@ -464,20 +409,12 @@ const LandingPage = () => {
           <div className="max-w-6xl mx-auto">
             {/* Investment Image */}
             <div className="text-center mb-6 md:mb-8">
-              <img
-                src="/lovable-uploads/15018611-64cc-40de-a116-b793d50d7c02.png"
-                alt="Encuentra tu próxima inversión con Inmobify"
-                className="w-full max-w-md mx-auto rounded-lg shadow-lg"
-              />
+              <img src="/lovable-uploads/15018611-64cc-40de-a116-b793d50d7c02.png" alt="Encuentra tu próxima inversión con Inmobify" className="w-full max-w-md mx-auto rounded-lg shadow-lg" />
             </div>
             
             <div className="text-center">
               <div className="mb-4 md:mb-6 lg:mb-8">
-                <img
-                  src="/lovable-uploads/7b671cb7-3959-4601-b3f8-9834f2ed7d19.png"
-                  alt="Inmobify Logo"
-                  className="h-6 md:h-8 lg:h-12 mx-auto mb-3 md:mb-4"
-                />
+                <img src="/lovable-uploads/7b671cb7-3959-4601-b3f8-9834f2ed7d19.png" alt="Inmobify Logo" className="h-6 md:h-8 lg:h-12 mx-auto mb-3 md:mb-4" />
               </div>
               
               <div className="flex justify-center space-x-4 md:space-x-6 mb-4 md:mb-6 lg:mb-8">
@@ -487,9 +424,7 @@ const LandingPage = () => {
                 <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-xs md:text-sm">
                   Instagram
                 </a>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-xs md:text-sm">
-                  LinkedIn
-                </a>
+                
               </div>
 
               <p className="text-xs text-muted-foreground">
@@ -503,12 +438,7 @@ const LandingPage = () => {
       </div>
 
       {/* Popup Form */}
-      <EvaluationFormPopup 
-        isOpen={isFormPopupOpen} 
-        onClose={() => setIsFormPopupOpen(false)} 
-      />
-    </div>
-  );
+      <EvaluationFormPopup isOpen={isFormPopupOpen} onClose={() => setIsFormPopupOpen(false)} />
+    </div>;
 };
-
 export default LandingPage;
