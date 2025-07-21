@@ -25,7 +25,7 @@ const VSLSection = ({ onCTAClick }: VSLSectionProps) => {
           <div className="relative w-full max-w-3xl mx-auto">
             <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
               <wistia-player 
-                media-id="77cc5muon3" 
+                media-id="zp4s1snxgs" 
                 aspect="1.7777777777777777"
               />
             </div>
