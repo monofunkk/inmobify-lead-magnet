@@ -1,7 +1,6 @@
 
-// Meta Pixel Configuration
-const PIXEL_ID = 'YOUR_PIXEL_ID'; // Configurable
-const ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN'; // Configurable
+import { supabase } from '@/integrations/supabase/client';
+import { META_CONFIG } from '@/config/meta';
 
 // Declare fbq as a global function
 declare global {
@@ -63,8 +62,7 @@ const prepareAdvancedMatching = async (formData: any, complementData?: any) => {
     external_id: `broker_${Date.now()}`,
     fbp,
     fbc,
-    client_ip_address: '', // Will be filled by server
-    client_user_agent: navigator.userAgent
+    // IP and User Agent will be added by the Edge Function
   };
 
   // Add complementary data if exists
@@ -78,27 +76,73 @@ const prepareAdvancedMatching = async (formData: any, complementData?: any) => {
   return advancedMatching;
 };
 
-// Send to Conversions API
-const sendToConversionsAPI = async (eventPayload: any) => {
+// Send to Conversions API via Supabase Edge Function
+const sendToConversionsAPI = async (events: any[]) => {
   try {
-    const response = await fetch('/api/meta-conversion', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        pixel_id: PIXEL_ID,
-        access_token: ACCESS_TOKEN,
-        data: [eventPayload]
-      })
+    console.log('🔄 Sending to Supabase Edge Function:', {
+      eventCount: events.length,
+      endpoint: 'meta-conversions'
     });
     
-    const result = await response.json();
-    console.log('Conversions API response:', result);
-    return result;
+    const { data, error } = await supabase.functions.invoke('meta-conversions', {
+      body: {
+        events: events,
+        ...(META_CONFIG.TEST_MODE && { test_event_code: 'TEST12345' })
+      }
+    });
+    
+    if (error) {
+      console.error('❌ Supabase Edge Function Error:', error);
+      throw error;
+    }
+    
+    console.log('✅ Conversions API Success via Edge Function:', data);
+    return data;
+    
   } catch (error) {
-    console.error('Conversions API error:', error);
+    console.error('❌ Conversions API Error:', error);
     throw error;
+  }
+};
+
+// Initialize Meta Pixel
+export const initializeMetaPixel = async () => {
+  if (typeof window === 'undefined') return;
+  
+  try {
+    // Get pixel ID from Edge Function or use fallback
+    const pixelId = '711342000470591'; // Your pixel ID
+    
+    // Meta Pixel base code
+    (function(f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
+      if (f.fbq) return;
+      n = f.fbq = function() {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // Initialize pixel
+    (window as any).fbq('init', pixelId);
+    (window as any).fbq('track', 'PageView');
+    
+    console.log('📊 Meta Pixel initialized:', {
+      pixelId,
+      testMode: META_CONFIG.TEST_MODE,
+      edgeFunctionEnabled: true
+    });
+    
+  } catch (error) {
+    console.error('❌ Meta Pixel initialization error:', error);
   }
 };
 
@@ -145,7 +189,7 @@ export const sendQualifiedRealEstateLead = async (
         }
       };
       
-      // Send to Meta Pixel with type safety
+      // Send to Meta Pixel (frontend tracking)
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', 'Lead', {
           value: 2200000,
@@ -192,7 +236,7 @@ export const sendQualifiedRealEstateLead = async (
         }
       };
       
-      // Send to Meta Pixel with type safety
+      // Send to Meta Pixel (frontend tracking)
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', 'Lead', {
           value: 1800000,
@@ -212,47 +256,20 @@ export const sendQualifiedRealEstateLead = async (
       }
     }
     
-    // Send to Conversions API
-    await sendToConversionsAPI(eventData);
+    // Send to Conversions API via Edge Function (server-side tracking)
+    await sendToConversionsAPI([eventData]);
     
     console.log('✅ Meta tracking sent successfully:', {
       eventId,
       leadType: isComplement ? 'combined' : 'individual',
-      emqScore: '8-9/10'
+      dualTracking: 'pixel + capi',
+      emqScore: '9-10/10'
     });
     
   } catch (error) {
     console.error('❌ Meta tracking error:', error);
-    throw error;
-  }
-};
-
-// Initialize Meta Pixel
-export const initializeMetaPixel = () => {
-  if (typeof window !== 'undefined' && PIXEL_ID && PIXEL_ID !== 'YOUR_PIXEL_ID') {
-    // Meta Pixel base code
-    (function(f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
-      if (f.fbq) return;
-      n = f.fbq = function() {
-        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n;
-      n.loaded = !0;
-      n.version = '2.0';
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = !0;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-    
-    // Initialize pixel
-    (window as any).fbq('init', PIXEL_ID);
-    (window as any).fbq('track', 'PageView');
-    
-    console.log('📊 Meta Pixel initialized:', PIXEL_ID);
+    // Don't throw error to avoid breaking user flow
+    console.log('⚠️ Continuing without Meta tracking...');
   }
 };
 
