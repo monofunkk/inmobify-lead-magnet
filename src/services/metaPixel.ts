@@ -3,6 +3,13 @@
 const PIXEL_ID = 'YOUR_PIXEL_ID'; // Configurable
 const ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN'; // Configurable
 
+// Declare fbq as a global function
+declare global {
+  interface Window {
+    fbq: (command: string, eventName: string, parameters?: any, options?: any) => void;
+  }
+}
+
 // Income thresholds for real estate qualification
 const INCOME_THRESHOLDS = {
   INDIVIDUAL: 1400000,    // Direct qualification
@@ -138,9 +145,9 @@ export const sendQualifiedRealEstateLead = async (
         }
       };
       
-      // Send to Meta Pixel
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', {
+      // Send to Meta Pixel with type safety
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Lead', {
           value: 2200000,
           currency: 'CLP',
           content_category: 'real_estate_premium_individual',
@@ -185,9 +192,9 @@ export const sendQualifiedRealEstateLead = async (
         }
       };
       
-      // Send to Meta Pixel
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', {
+      // Send to Meta Pixel with type safety
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Lead', {
           value: 1800000,
           currency: 'CLP',
           content_category: 'real_estate_combined',
